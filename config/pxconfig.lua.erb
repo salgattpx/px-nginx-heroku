@@ -18,7 +18,7 @@ _M.block_enabled = <%= ENV["PX_BLOCKING_ENABLED"] %>
 
 -- ## Additional Configuration Parameters ##
 -- _M.sensitive_headers = {'cookie', 'cookies'}
--- _M.ip_headers = {}
+_M.ip_headers = {'x-forwarded-for'}
 -- _M.score_header_name = 'X-PX-SCORE'
 -- _M.sensitive_routes_prefix = {}
 -- _M.sensitive_routes_suffix = {}
