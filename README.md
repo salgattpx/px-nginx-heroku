@@ -13,6 +13,23 @@ This buildpack allows you to run nginx (w/lua module) on a Heroku dyno.
 
 Note: SSL and PCRE packages are [already available](https://devcenter.heroku.com/articles/cedar-ubuntu-packages) on Heroku, so they don't need to be downloaded before building nginx.
 
+## Before buildpack installation
+
+This buildpack requires a few "Config Vars" to be setup within the Heroku application before it is installed. 
+
+1. Login to your Heroku account.
+2. Open the application that this buildpack will be added to
+3. Navigate to the application's *Settings* page
+4. Click on the *Reveal Config Vars* button within the *Config Vars* section of the *Settings* page
+5. Add the following Config Vars using the below table's Key : Value entries.
+   | KEY | VALUE |
+   | --- | ----- |
+   | PX_APP_ID | This is the PerimeterX Application ID found within your application in the PerimeterX Portal |
+   | PX_AUTH_TOKEN | This is the PerimeterX Server Token found within your application in the PerimeterX Portal |
+   | PX_COOKIE_KEY | This is the PerimeterX Risk Cookie found within your policy in the PerimeterX Portal |
+   | PX_BLOCKING_ENABLED | This controls whether the PerimeterX Enforcer is in blocking mode or not. This should be set to false initially |
+6. After these Config Vars have been added, you can then add this buildpack to your application
+
 ## Using this buildpack
 
 After adding the buildpack, `nginx` will be available on your path. But here comes the tricky part: Heroku sends HTTP traffic to a random port on any given dyno, indicated by the `PORT` environment variable. So in order for nginx to receive incoming requests, the `web` process in your `Procfile` needs to do the following:
@@ -61,3 +78,7 @@ It's not the prettiest, but it _should_ sort out your issues. Basically, it prov
 ## Credits
 
 This buildpack is based on ryandotsmith's [nginx-buildpack](https://github.com/ryandotsmith/nginx-buildpack). It has since been heavily adapted by PerimeterX in order to provide support for the Lua Enforcer Module
+
+## Support
+
+If there are any support related questions with this buildpack, contact [PerimeterX Support](mailto:support@perimeterx.com)
